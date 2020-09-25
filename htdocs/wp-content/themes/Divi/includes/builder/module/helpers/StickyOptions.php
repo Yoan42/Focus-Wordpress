@@ -289,9 +289,9 @@ class ET_Builder_Module_Sticky_Options {
 		// If current selector is sticky module, sticky selector is directly attached; if it isn't
 		// it is safe to assume that the sticky selector is one of its parent DOM, hence the space.
 		if ( $is_sticky ) {
-			$selectors = preg_replace( '/(%%order_class%%)/i', '.et_pb_sticky$1', $selectors );
+			$selectors = preg_replace( '/(%%order_class%%)/i', '.et_pb_sticky$1', $selectors, 1 );
 		} else {
-			$selectors = preg_replace( '/(%%order_class%%)/i', '.et_pb_sticky $1', $selectors );
+			$selectors = preg_replace( '/(%%order_class%%)/i', '.et_pb_sticky $1', $selectors, 1 );
 		}
 
 		return implode( ', ', $selectors );

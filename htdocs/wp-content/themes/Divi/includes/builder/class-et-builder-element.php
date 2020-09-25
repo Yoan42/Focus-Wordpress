@@ -15669,6 +15669,8 @@ class ET_Builder_Element {
 		$hover  = et_pb_hover_options();
 		$sticky = et_pb_sticky_options();
 
+		$has_wrapper = et_()->array_get( $this->wrapper_settings, 'order_class_wrapper', false );
+
 		foreach ( $this->advanced_fields['button'] as $option_name => $option_settings ) {
 			$button_custom   = $this->props[ "custom_{$option_name}" ];
 			$button_use_icon = isset( $this->props[ "{$option_name}_use_icon" ] ) ? $this->props[ "{$option_name}_use_icon" ] : 'on';
@@ -15816,6 +15818,7 @@ class ET_Builder_Element {
 				$button_border_radius_processed       = '' !== $button_border_radius && 'px' !== $button_border_radius ? et_builder_process_range_value( $button_border_radius ) : '';
 				$button_border_radius_hover_processed = null !== $button_border_radius_hover && 'px' !== $button_border_radius_hover && $button_border_radius_hover !== $button_border_radius ? et_builder_process_range_value( $button_border_radius_hover ) : '';
 				$button_use_icon                      = '' === $button_use_icon ? 'on' : $button_use_icon;
+				$is_sticky_module_without_wrapper     = $has_wrapper ? false : $this->is_sticky_module;
 
 				$css_element           = ! empty( $option_settings['css']['main'] ) ? $option_settings['css']['main'] : $this->main_css_element . ' .et_pb_button';
 				$css_element_processed = $css_element;
@@ -15979,10 +15982,7 @@ class ET_Builder_Element {
 					if ( '' !== $mode_styles_declaration ) {
 						switch ( $mode ) {
 							case 'sticky':
-								$mode_selector = $helper->add_sticky_to_order_class(
-									$css_element_processed,
-									$helper->is_sticky_module( $this->props )
-								);
+								$mode_selector = $helper->add_sticky_to_order_class( $css_element_processed, $is_sticky_module_without_wrapper );
 								break;
 
 							case 'hover':
@@ -16184,7 +16184,7 @@ class ET_Builder_Element {
 				self::set_style( $function_name, $el_style );
 
 				$el_style = array(
-					'selector'    => $sticky->add_sticky_to_order_class( $selector, $this->is_sticky_module ),
+					'selector'    => $sticky->add_sticky_to_order_class( $selector, $is_sticky_module_without_wrapper ),
 					'declaration' => rtrim( $main_element_styles_after_sticky ),
 				);
 				self::set_style( $function_name, $el_style );
@@ -16514,6 +16514,7 @@ class ET_Builder_Element {
 						'base_prop_name'       => $base_prop_name,
 						'props'                => $this->props,
 						'selector'             => $css_element_processed,
+						'selector_sticky'      => $sticky->add_sticky_to_order_class( $css_element_processed, $is_sticky_module_without_wrapper ),
 						'function_name'        => $function_name,
 						'important'            => et_()->array_get( $option_settings, 'css.important', false ) ? ' !important' : '',
 						'use_background_video' => false,
@@ -16886,8 +16887,9 @@ class ET_Builder_Element {
 		 */
 		$box_shadow = ET_Builder_Module_Fields_Factory::get( 'BoxShadow' );
 
-		$advanced_fields = self::$_->array_get( $this->advanced_fields, 'box_shadow', array( 'default' => array() ) );
-
+		$advanced_fields                  = self::$_->array_get( $this->advanced_fields, 'box_shadow', array( 'default' => array() ) );
+		$has_wrapper                      = et_()->array_get( $this->wrapper_settings, 'order_class_wrapper', false );
+		$is_sticky_module_without_wrapper = $has_wrapper ? false : $this->is_sticky_module;
 		if ( ! $advanced_fields ) {
 			return '';
 		}
@@ -17050,8 +17052,8 @@ class ET_Builder_Element {
 					)
 				);
 				$sticky_selector = 'default' === $option_name ?
-					$sticky->add_sticky_to_order_class( $selector, $this->is_sticky_module ) :
-					$sticky->add_sticky_to_selectors( $selector, $this->is_sticky_module );
+					$sticky->add_sticky_to_order_class( $selector, $is_sticky_module_without_wrapper ) :
+					$sticky->add_sticky_to_selectors( $selector, $is_sticky_module_without_wrapper );
 
 				// Custom box shadow sticky selector.
 				$custom_sticky = self::$_->array_get( $option_settings, 'css.sticky', '' );

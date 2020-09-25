@@ -1,3 +1,41 @@
+version 4.6.4 ( updated 09-24-2020 )
+- Product ordering issue fixed in the Shop module.
+- Fixed the Button background color Sticky state not being properly applied.
+- Fixed CSS string value auto turn into 0auto.
+- Fixed stuttering sticky element on sticky section at theme builder header due to image that affects section height, slow connection, and disabled cache.
+- Fixed sticky background gradient and image not working in Section.
+- Fixed default WordPress lazy load feature not working properly with images in Divi Builder modules.
+- Fixed the Button background color Sticky state not being properly applied.
+- Fixed the issue with downloading a backup of Divi Theme Options.
+	* core/admin/js/portability.js
+	* epanel/custom_functions.php
+	* includes/builder/api/rest/BlockLayout.php
+	* includes/builder/autoload.php
+	* includes/builder/class-et-builder-element.php
+	* includes/builder/core.php
+	* includes/builder/feature/AjaxCache.php
+	* includes/builder/feature/BlockEditorIntegration.php
+	* includes/builder/feature/ClassicEditor.php
+	* includes/builder/frontend-builder/bundle.js
+	* includes/builder/module/Blurb.php
+	* includes/builder/module/FullwidthHeader.php
+	* includes/builder/module/FullwidthImage.php
+	* includes/builder/module/FullwidthMenu.php
+	* includes/builder/module/FullwidthPortfolio.php
+	* includes/builder/module/FullwidthPostTitle.php
+	* includes/builder/module/Gallery.php
+	* includes/builder/module/Image.php
+	* includes/builder/module/Menu.php
+	* includes/builder/module/PostTitle.php
+	* includes/builder/module/Shop.php
+	* includes/builder/module/SliderItem.php
+	* includes/builder/module/TeamMember.php
+	* includes/builder/module/field/TextShadow.php
+	* includes/builder/module/helpers/ResponsiveOptions.php
+	* includes/builder/module/helpers/StickyOptions.php
+	* includes/builder/module/helpers/class-et-builder-module-helper-media.php
+	* includes/builder/scripts/frontend/sticky-element.js
+
 version 4.6.3 ( updated 09-18-2020 )
 - Fixed speciality section inner max-width option.
 	* includes/builder/class-et-builder-element.php

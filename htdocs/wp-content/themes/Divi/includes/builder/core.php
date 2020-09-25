@@ -33,8 +33,14 @@ add_filter( 'et_builder_render_layout', 'convert_smilies', 20 );
 add_filter( 'et_builder_render_layout', 'wpautop' );
 add_filter( 'et_builder_render_layout', 'shortcode_unautop' );
 add_filter( 'et_builder_render_layout', 'prepend_attachment' );
-add_filter( 'et_builder_render_layout', 'et_builder_filter_content_image_tags' );
 add_filter( 'et_builder_render_layout', 'do_shortcode', 11 ); // AFTER wpautop().
+
+// Run et_builder_filter_content_image_tags() after do_shortcode() to fill any
+// missing height and width attributes on the image. Those attributes are required
+// to add loading "lazy" attribute on the image. In this case, we set the order as
+// 12 because TB runs do_shortcode() on order 11.
+add_filter( 'the_content', 'et_builder_filter_content_image_tags', 12 );
+add_filter( 'et_builder_render_layout', 'et_builder_filter_content_image_tags', 12 );
 
 if ( ! function_exists( 'et_builder_filter_content_image_tags' ) ) {
 	/**

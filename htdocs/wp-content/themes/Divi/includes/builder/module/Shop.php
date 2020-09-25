@@ -492,8 +492,8 @@ class ET_Builder_Module_Shop extends ET_Builder_Module_Type_PostBased {
 		$post_id            = isset( $current_page['id'] ) ? (int) $current_page['id'] : 0;
 		$type               = $this->props['type'];
 		$posts_number       = $this->props['posts_number'];
-		$orderby            = 'default' === $type ? 'id' : $this->props['orderby'];
-		$order              = 'default' === $type ? 'DESC' : 'ASC';
+		$orderby            = $this->props['orderby'];
+		$order              = 'ASC';
 		$columns            = $this->props['columns_number'];
 		$pagination         = 'on' === $this->prop( 'show_pagination', 'off' );
 		$product_categories = array();
@@ -606,15 +606,15 @@ class ET_Builder_Module_Shop extends ET_Builder_Module_Type_PostBased {
 
 		$query_backup = $wp_the_query;
 
-		if ( $use_current_loop ) {
+		if ( 'product_category' === $type || $use_current_loop ) {
 			add_filter( 'woocommerce_shortcode_products_query', array( $this, 'filter_products_query' ) );
-			add_action( 'pre_get_posts', array( $this, 'apply_woo_widget_filters' ), 0 );
+			add_action( 'pre_get_posts', array( $this, 'apply_woo_widget_filters' ), 10 );
 		}
 
 		$shop = do_shortcode( $shortcode );
 
-		if ( $use_current_loop ) {
-			remove_action( 'pre_get_posts', array( $this, 'apply_woo_widget_filters' ), 0 );
+		if ( 'product_category' === $type || $use_current_loop ) {
+			remove_action( 'pre_get_posts', array( $this, 'apply_woo_widget_filters' ), 10 );
 			remove_filter( 'woocommerce_shortcode_products_query', array( $this, 'filter_products_query' ) );
 		}
 
@@ -810,9 +810,8 @@ class ET_Builder_Module_Shop extends ET_Builder_Module_Type_PostBased {
 			$query_args['meta_query'] = WC()->query->get_meta_query( et_()->array_get( $query_args, 'meta_query', array() ), true );
 			$query_args['tax_query']  = WC()->query->get_tax_query( et_()->array_get( $query_args, 'tax_query', array() ), true );
 
-			// Add fake cache-busting arguments as the filtering is actually done in self::apply_woo_widget_filters().
-			$query_args['et_builder_filter_min_price'] = sanitize_text_field( et_()->array_get( $_GET, 'min_price', '' ) );
-			$query_args['et_builder_filter_max_price'] = sanitize_text_field( et_()->array_get( $_GET, 'max_price', '' ) );
+			// Add fake cache-busting argument as the filtering is actually done in self::apply_woo_widget_filters().
+			$query_args['nocache'] = microtime( true );
 		}
 
 		return $query_args;

@@ -14,10 +14,10 @@
 		</a>
 	</li>
 <?php endif; ?>
-<?php if ( 'on' === et_get_option( 'divi_show_linkdin_icon', 'on' ) ) : ?>
-	<li class="et-social-icon et-social-linkdin">
+<?php if ( 'on' === et_get_option( 'divi_show_google_icon', 'on' ) ) : ?>
+	<li class="et-social-icon et-social-google-plus">
 		<a href="<?php echo esc_url( et_get_option( 'divi_google_url', '#' ) ); ?>" class="icon">
-			<span><?php esc_html_e( 'Linkdin', 'Divi' ); ?></span>
+			<span><?php esc_html_e( 'Google', 'Divi' ); ?></span>
 		</a>
 	</li>
 <?php endif; ?>

@@ -118,6 +118,9 @@ function _et_pb_autoload( $class ) {
 		case 'ET_Builder_I18n':
 			require_once 'feature/I18n.php';
 			break;
+		case 'ET_Builder_Module_Helper_Media':
+			require_once 'module/helpers/class-et-builder-module-helper-media.php';
+			break;
 	}
 }
 
@@ -347,4 +350,15 @@ function et_pb_option_template() {
  */
 function et_pb_background_options() {
 	return ET_Builder_Module_Helper_Background::instance();
+}
+
+/**
+ * Class ET_Builder_Module_Helper_Media wrapper
+ *
+ * @since 4.6.4
+ *
+ * @return ET_Builder_Module_Helper_Media
+ */
+function et_pb_media_options() {
+	return ET_Builder_Module_Helper_Media::instance();
 }

@@ -95,7 +95,7 @@
 			$( '.et-core-portability-import-placeholder' ).text( file.name );
 		},
 
-		import: function() {
+		import: function(noBackup) {
 			var $this = this;
 			var file = $this.instance('input[type="file"]').get(0).files[0];
 

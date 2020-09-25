@@ -14207,7 +14207,7 @@ span.comment_date {
     height: 100%;
     margin: 0; }
   .et-db #et-boc .et-l .et_pb_fullwidth_portfolio .et_pb_portfolio_image img {
-    max-width: inherit;
+    max-width: 100%;
     height: inherit;
     min-height: 100%;
     min-width: 100%; }
