@@ -1,3 +1,17 @@
+version 4.6.5 ( updated 09-25-2020 )
+- Fixed broken image size on Image module and image logo of Menu module.
+- Fixed navigation anchor wrong target position with position-fixed section in theme builder header.
+- Removed alternative scroll-to-anchor option from Divi Theme Options and made it the default behavior.
+	* functions.php
+	* includes/builder/autoload.php
+	* includes/builder/module/FullwidthImage.php
+	* includes/builder/module/FullwidthMenu.php
+	* includes/builder/module/Image.php
+	* includes/builder/module/Menu.php
+	* includes/builder/module/helpers/class-et-builder-module-helper-media.php
+	* includes/builder/scripts/frontend/global-functions.js
+	* options_divi.php
+
 version 4.6.4 ( updated 09-24-2020 )
 - Product ordering issue fixed in the Shop module.
 - Fixed the Button background color Sticky state not being properly applied.

@@ -867,8 +867,10 @@ class ET_Builder_Module_Menu extends ET_Builder_Module {
 		$logo_url_new_window = $this->props['logo_url_new_window'];
 
 		$logo_image_attrs = array(
-			'src' => '{{logo}}',
-			'alt' => $logo_alt,
+			'src'    => '{{logo}}',
+			'alt'    => $logo_alt,
+			'height' => 'auto',
+			'width'  => 'auto',
 		);
 
 		$logo_image_attachment_class = et_pb_media_options()->get_image_attachment_class( $this->props, 'logo' );

@@ -375,35 +375,6 @@ function et_add_viewport_meta(){
 }
 add_action( 'wp_head', 'et_add_viewport_meta' );
 
-function et_maybe_add_scroll_to_anchor_fix() {
-	$add_scroll_to_anchor_fix = et_get_option( 'divi_scroll_to_anchor_fix' );
-
-	if ( 'on' === $add_scroll_to_anchor_fix ) {
-		echo '<script>
-				document.addEventListener( "DOMContentLoaded", function( event ) {
-					window.et_location_hash = window.location.hash.replace(/[^a-zA-Z0-9-_#]/g, "");
-					if ( "" !== window.et_location_hash ) {
-						// Prevent jump to anchor - Firefox
-						window.scrollTo( 0, 0 );
-						var et_anchor_element = document.getElementById( window.et_location_hash.substring( 1 ) );
-						if( et_anchor_element === null ) {
-						    return;
-						}
-						// bypass auto scrolling, if supported
-						if ("scrollRestoration" in history) {
-							history.scrollRestoration = "manual";
-						} else {
-							// Prevent jump to anchor - Other Browsers
-							window.et_location_hash_style = et_anchor_element.style.display;
-							et_anchor_element.style.display = "none";
-						}
-					}
-				} );
-		</script>';
-	}
-}
-add_action( 'wp_head', 'et_maybe_add_scroll_to_anchor_fix', 9 );
-
 function et_remove_additional_stylesheet( $stylesheet ){
 	global $default_colorscheme;
 	return $default_colorscheme;
